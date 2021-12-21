@@ -14,33 +14,43 @@
 #Hint 2: Read this breakdown of program requirements: 
 #   http://listmoz.com/view/6h34DJpvJBFVRlZfJvxF
 #Then try to create your own flowchart for the program.
-from art import logo
+
+#from art import logo
 import random as rnd
 
-print (logo)
+#print (logo)
 cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
 total_player_score = 0
+total_player_score_arg = 0
 dealer_score = 0
 cont_playing = "y"
 players_cards = []
-
-def draw_a_card_player(total_player_score):
+wanna_play = input("Do you want to play a game? Type in y or n. ")
+  
+def draw_a_card_player(total_player_score_par):
   card_drawn = rnd.choice(cards)
   # print ("card_drawn: " + str(card_drawn))
   # print (total_player_score)
-  total_player_score = total_player_score + card_drawn
+  total_player_score_arg = total_player_score_par + card_drawn
   card_drawn = rnd.choice(cards)
   # total_player_score = total_player_score + card_drawn
   # print ("card_drawn: " + str(card_drawn))
-  print (total_player_score)
-  return total_player_score
+  print ("total_player_score " + str(total_player_score_arg))
+  return total_player_score_arg
+
+if wanna_play == "y":
+  draw_a_card_player(total_player_score_arg)
+  draw_a_card_player(total_player_score_arg)
+  if total_player_score == 21:
+    print "BLACKJACK - You won."
+  elif:input ()
 
 while cont_playing == "y":
-  cont = input("Do you want to play a game? Type in y or n. ")
+  cont = input("Do you want to draw another round? Type in y or n. ")
   if cont_playing == "n":
     break
-  draw_a_card_player(total_player_score)
-  draw_a_card_player(total_player_score)
+  draw_a_card_player(total_player_score_arg)
+  draw_a_card_player(total_player_score_arg)
   # temp = card_drawn
   # print (temp)
   print (total_player_score)
@@ -60,5 +70,8 @@ while cont_playing == "y":
     if more_cards == "n":
       break
 
-#Testing
-draw_a_card_player(0)
+"""Testing
+#draw_a_card_player(0)
+
+
+"""
