@@ -14,19 +14,58 @@
 #Hint 2: Read this breakdown of program requirements: 
 #   http://listmoz.com/view/6h34DJpvJBFVRlZfJvxF
 #Then try to create your own flowchart for the program.
+#Hint 3: Download and read this flow chart I've created: 
+# see saved link
 
-#from art import logo
+from art import logo
 import random as rnd
 
-#print (logo)
+print (logo)
 cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
-total_player_score = 0
-total_player_score_arg = 0
+# card = rnd.choice(cards)
+cards_player = []
+cards_dealer = []
+player_score = 0
 dealer_score = 0
 cont_playing = "y"
-players_cards = []
-wanna_play = input("Do you want to play a game? Type in y or n. ")
+# wanna_play = input("Do you want to play a game? Type in y or n. ")
+wanna_play = "y"
+
+def draw_a_card():
+  card = rnd.choice(cards)
+  return card
+
+
+if wanna_play == "y":
+  # first 2 cards of p1 and print his score
+  cards_player.append(draw_a_card())
+  cards_player.append(draw_a_card())
+  player_score = cards_player[0] + cards_player[1]
+  print (f"Your cards: {cards_player} your score is: {player_score}")
+  # PCs first card and print his score
+  cards_dealer.append(draw_a_card())
+  cards_dealer.append(draw_a_card())
+  dealer_score = cards_dealer[0] + cards_dealer[1]
+  print (f"The PCs first card: {cards_dealer[0]}")
   
+  if dealer_score == 21:
+    print (logo)
+    print (f"The dealer got Blackjack. The game is over.")
+  elif player_score == 21:
+    print (logo)
+    print (f"You got Blackjack. The game is over.")
+  if player_score >= 22:
+    
+    
+
+
+
+
+
+
+"""
+Testing
+#draw_a_card_player(0)
 def draw_a_card_player(total_player_score_par):
   card_drawn = rnd.choice(cards)
   # print ("card_drawn: " + str(card_drawn))
@@ -69,9 +108,5 @@ while cont_playing == "y":
     more_cards = input("Do you want to draw another card? Type in y or n. ")
     if more_cards == "n":
       break
-
-"""Testing
-#draw_a_card_player(0)
-
 
 """
