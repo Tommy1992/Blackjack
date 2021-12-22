@@ -25,19 +25,17 @@ cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
 # card = rnd.choice(cards)
 cards_player = []
 cards_dealer = []
+global player_score
 player_score = 0
 dealer_score = 0
 cont_playing = "y"
-# wanna_play = input("Do you want to play a game? Type in y or n. ")
-wanna_play = "y"
 
 def draw_a_card():
-  card = rnd.choice(cards)
-  return card
+  card_value = rnd.choice(cards)
+  return card_value
 
-
-if wanna_play == "y":
-  # first 2 cards of p1 and print his score
+# first 2 cards of p1 and print his score
+def two_cards_for_player_1for_dealer():
   cards_player.append(draw_a_card())
   cards_player.append(draw_a_card())
   player_score = cards_player[0] + cards_player[1]
@@ -47,16 +45,43 @@ if wanna_play == "y":
   cards_dealer.append(draw_a_card())
   dealer_score = cards_dealer[0] + cards_dealer[1]
   print (f"The PCs first card: {cards_dealer[0]}")
-  
-  if dealer_score == 21:
-    print (logo)
-    print (f"The dealer got Blackjack. The game is over.")
-  elif player_score == 21:
-    print (logo)
-    print (f"You got Blackjack. The game is over.")
-  if player_score >= 22:
+  return player_score
+
+two_cards_for_player_1for_dealer()
+
+def checking_bj_and_over21():  
+    if dealer_score == 21: #checking for users and dealers blackjack
+      print (logo)
+      print (f"The dealer got Blackjack. The game is over.")
+    elif player_score == 21:
+      print (logo)
+      print (f"You got Blackjack. The game is over.")
+
+    # cards_player = [10,10,20] #test
+    # player_score = 31 #test
+    if player_score > 21: #needs testing
+      if cards_player.count(11) != 0:
+        player_score -= cards_player.count(11)*10
+        if player_score > 21:
+          print (f"You got over 21 points. The game is over. #Loser")
+      else:
+        print (f"You got over 21 points. The game is over. #Loser")
+
+another_card = input("Do you want another card ? Type in y or n. ")
+if another_card == "y":
+    cards_player.append(draw_a_card())
+    player_score = cards_player[0] + cards_player[1] + cards_player[2]
+    print (f"Your cards: {cards_player} your score is: {player_score}")
+    checking_bj_and_over21()
     
     
+    
+
+
+
+
+
+
 
 
 
