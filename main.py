@@ -25,10 +25,8 @@ cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
 # card = rnd.choice(cards)
 cards_player = []
 cards_dealer = []
-global player_score
 player_score = 0
 dealer_score = 0
-cont_playing = "y"
 
 def draw_a_card():
   card_value = rnd.choice(cards)
@@ -45,17 +43,17 @@ def two_cards_for_player_1for_dealer():
   cards_dealer.append(draw_a_card())
   dealer_score = cards_dealer[0] + cards_dealer[1]
   print (f"The PCs first card: {cards_dealer[0]}")
-  return player_score
+  return (player_score, dealer_score)
 
 two_cards_for_player_1for_dealer()
 
-def checking_bj_and_over21():  
+def checking_bj_and_over21(player_score, dealer_score):  
     if dealer_score == 21: #checking for users and dealers blackjack
       print (logo)
-      print (f"The dealer got Blackjack. The game is over.")
+      print (f"The dealer got Blackjack. The game is over. #Loser")
     elif player_score == 21:
       print (logo)
-      print (f"You got Blackjack. The game is over.")
+      print (f"You got Blackjack. The game is over. #Winner")
 
     # cards_player = [10,10,20] #test
     # player_score = 31 #test
@@ -67,13 +65,22 @@ def checking_bj_and_over21():
       else:
         print (f"You got over 21 points. The game is over. #Loser")
 
-another_card = input("Do you want another card ? Type in y or n. ")
-if another_card == "y":
-    cards_player.append(draw_a_card())
-    player_score = cards_player[0] + cards_player[1] + cards_player[2]
-    print (f"Your cards: {cards_player} your score is: {player_score}")
-    checking_bj_and_over21()
-    
+checking_bj_and_over21(player_score, dealer_score)
+def another_card():
+  another_card_var = input("Do you want another card ? Type in y or n. ")
+  if another_card_var == "y":
+      cards_player.append(draw_a_card())
+      player_score = cards_player[0] + cards_player[1] + cards_player[2]
+      print (f"Your cards: {cards_player} your score is: {player_score}")
+      checking_bj_and_over21(player_score, dealer_score)
+  another_card()
+another_card()
+
+
+a = input("New round?")
+two_cards_for_player_1for_dealer()
+checking_bj_and_over21(player_score, dealer_score)
+another_card()
     
     
 
