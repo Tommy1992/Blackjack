@@ -22,17 +22,18 @@ import random as rnd
 
 print (logo)
 cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
-# card = rnd.choice(cards)
 cards_player = []
 cards_dealer = []
+global player_score
 player_score = 0
 dealer_score = 0
+break_var = False
 
 def draw_a_card():
   card_value = rnd.choice(cards)
   return card_value
 
-# first 2 cards of p1 and print his score
+# show first 2 cards of p1 and show 1 dealers' card and print his 1-card-score
 def two_cards_for_player_1for_dealer():
   cards_player.append(draw_a_card())
   cards_player.append(draw_a_card())
@@ -45,10 +46,10 @@ def two_cards_for_player_1for_dealer():
   print (f"The PCs first card: {cards_dealer[0]}")
   return (player_score, dealer_score)
 
-two_cards_for_player_1for_dealer()
+
 
 def checking_bj_and_over21(player_score, dealer_score):  
-    if dealer_score == 21: #checking for users and dealers blackjack
+    if dealer_score == 21: #checking for users and dealers blackjack, a rule of the game, at a blackjack draw - the dealer wins, though if dealer_Score == 21 is valid
       print (logo)
       print (f"The dealer got Blackjack. The game is over. #Loser")
     elif player_score == 21:
@@ -59,28 +60,31 @@ def checking_bj_and_over21(player_score, dealer_score):
     # player_score = 31 #test
     if player_score > 21: #needs testing
       if cards_player.count(11) != 0:
-        player_score -= cards_player.count(11)*10
+        player_score -= cards_player.count(11)*10 #subtracting 10 each time the user has a 11, resp. ace
         if player_score > 21:
-          print (f"You got over 21 points. The game is over. #Loser")
+          print (f"You got over 21 points. The game is over. #Loser") 
       else:
         print (f"You got over 21 points. The game is over. #Loser")
 
-checking_bj_and_over21(player_score, dealer_score)
-def another_card():
+def another_card(player_score):
   another_card_var = input("Do you want another card ? Type in y or n. ")
-  if another_card_var == "y":
+  while another_card_var == "y":
       cards_player.append(draw_a_card())
-      player_score = cards_player[0] + cards_player[1] + cards_player[2]
+      i = 0
+      #player_score = cards_player[0] + cards_player[1] + cards_player[2]
+      while i < (len(cards_player)-i):
+        player_score = player_score + cards_player[i]
+        i += 1
+      return player_score
       print (f"Your cards: {cards_player} your score is: {player_score}")
       checking_bj_and_over21(player_score, dealer_score)
-  another_card()
-another_card()
+      another_card()
 
-
-a = input("New round?")
-two_cards_for_player_1for_dealer()
-checking_bj_and_over21(player_score, dealer_score)
-another_card()
+play_game = input("Do you want to play a game of ^^? Type y or n, pls. ") #why does .lower not work?
+while play_game == "y":
+  two_cards_for_player_1for_dealer()
+  checking_bj_and_over21(player_score, dealer_score)
+  another_card(player_score)
     
     
 
