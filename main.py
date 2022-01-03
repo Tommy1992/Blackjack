@@ -72,13 +72,14 @@ def another_card(player_score):
       cards_player.append(draw_a_card())
       i = 0
       #player_score = cards_player[0] + cards_player[1] + cards_player[2]
-      while i < (len(cards_player)-i):
+      while i < (len(cards_player)):
         player_score = player_score + cards_player[i]
         i += 1
-      return player_score
       print (f"Your cards: {cards_player} your score is: {player_score}")
       checking_bj_and_over21(player_score, dealer_score)
-      another_card()
+      another_card(player_score)
+
+
 
 play_game = input("Do you want to play a game of ^^? Type y or n, pls. ") #why does .lower not work?
 while play_game == "y":
